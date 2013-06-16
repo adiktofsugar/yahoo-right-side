@@ -1,0 +1,18 @@
+#main #paneshell #shellcontent,
+#main #toolbar {
+	right: 0;
+}
+
+#main #theAd {
+	display: none;
+}
+
+#main #paneshell #shellcontent #inboxcontainer #msg-list{
+	left: auto;
+	right: 0;
+}
+
+#main #toolbar .commontasks {
+	float: right;
+	margin-right: 10px;
+}
