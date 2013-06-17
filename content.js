@@ -12,15 +12,23 @@ $(document).ready(function () {
 	};
 	loop();
 
-	var $slider = $("#rail-resize-vert"),
+	var $slider, sliderPos;
+	var initSlider = function () {
+		$slider = $("#rail-resize");
 		sliderPos = $slider.position();
+	};
+	initSlider();
 	var sliderChanged = function (cb) {
 		var pos = $slider.position();
-		if (pos.left != sliderPos.left) {
-			cb();
-		}
-		sliderPos = pos;
 
+		if ($slider.length > 0 && pos) {
+			if (pos.left != sliderPos.left) {
+				cb();
+			}
+			sliderPos = pos;
+		} else {
+			initSlider();
+		}
 		loopFunctions.push(function () {
 			sliderChanged(cb);
 		});
@@ -33,6 +41,9 @@ $(document).ready(function () {
 	var sliderChangedCb = function () {
 		console.log("slider changed");
 
+		if (!sliderPos) {
+			return false;
+		}
 		var left = sliderPos.left;
 		$preview.css({
 			marginLeft: -left, // getit back to 0, i can't mess with left because they're setting that.
